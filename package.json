@@ -14,10 +14,33 @@
         "typescript": "^4.7.4"
     },
     "scripts": {
-        "test": "jest DFSOnBST LRU LinearSearchList BinarySearchList TwoCrystalBalls BubbleSort DoublyLinkedList Queue Stack ArrayList MazeSolver QuickSort BTPreOrder BTInOrder BTPostOrder BTBFS CompareBinaryTrees DFSOnBST DFSGraphList Trie BFSGraphMatrix Map MinHeap",
+        "test1": "jest LinearSearchList",
+        "test2": "jest BinarySearchList",
+        "test3": "jest DFSOnBST ",
+        "test4": "jest LRU",
+        "test5": "jest TwoCrystalBalls ",
+        "test6": "jest BubbleSort",
+        "test7": "jest SinglyLinkedList",
+        "test8": "jest DoublyLinkedList",
+        "test9": "jest Queue",
+        "test10": "jest Stack",
+        "test11": "jest ArrayList ",
+        "test12": "jest MazeSolver",
+        "test13": "jest QuickSort",
+        "test14": "jest BTPreOrder",
+        "test15": "jest BTInOrder",
+        "test16": "jest BTPostOrder",
+        "test17": "jest BTBFS",
+        "test18": "jest CompareBinaryTrees",
+        "test19": "jest DFSOnBST",
+        "test20": "jest DFSGraphList",
+        "test21": "jest Trie",
+        "test22": "jest BFSGraphMatrix",
+        "test23": "jest Map",
+        "test24": "jest MinHeap",
         "clear": "node ./scripts/clear.js",
         "prettier": "prettier --write ./src",
         "generate": "node ./scripts/generate.js",
-        "day": "echo src\\day2"
+        "day": "echo src\\day1"
     }
 }
