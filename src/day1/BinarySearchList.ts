@@ -1,38 +1,63 @@
+// KEYS {
+//// Formula mid: low - ( high - low) / 2
+//// Remember: high is exclusive, low is inclusive (so to modify the low, you exclude the mid)
+// }
+
 export default function bs_list(haystack: number[], needle: number): boolean {
-    const middleIndex = Math.floor(haystack.length / 2);
+    let low = 0;
+    let high = haystack.length;
 
-    for (let i = 0; i < haystack.length; i++) {
-        const middle = haystack[middleIndex];
+    // While the low and the high don't clash (this will only happen when 1 element exists)
+    while (low < high) {
+        const mid = Math.floor(low + (high - low) / 2);
+        const value = haystack[mid];
 
-        if (middle == needle) {
+        if (value === needle) {
             return true;
-        }
+            // Lower than the desired value
+        } else if (value < needle) {
+            // Search right, from mid onwards (excluding the already checked mid)
 
-        const newArray = [];
+            low = mid + 1;
+            // Higher than the desired value
+        } else if (value > needle) {
+            // Search left, from mid backwards
 
-        // We have to look the left part of the array
-        if (middle > needle) {
-            // Starting from right, while j is lower than the middleIndex, increase that index
-            for (let j = 0; j < middleIndex; j++) {
-                // Assign to starting from 0, the value of haystack 0 and keep incrementing
-                newArray[j] = haystack[j];
-            }
-
-            bs_list(newArray, needle);
-        }
-
-        // We have to look the right part of the array
-        if (middle < needle) {
-            // Starting from middle, up until j is the same as the length of the array, keep incrementing
-            for (let j = middleIndex + 1; j < haystack.length; j++) {
-                // Assign to j(which is middleIndex for 0) the value of j - middleIndex
-                // The value of the array from the middle going to the right, so
-                newArray[j - middleIndex + 1] = haystack[j];
-            }
-
-            bs_list(newArray, needle);
+            high = mid;
         }
     }
 
     return false;
 }
+
+// Try 1
+
+// const middleIndex = Math.floor(haystack.length / 2);
+
+// for (let i = 0; i < haystack.length; i++) {
+//     const middle = haystack[middleIndex];
+
+//     if (middle == needle) {
+//         return true;
+//     }
+
+//     if (middle > needle) {
+//         let newArray = [];
+
+//         for (let j = 0; j < middleIndex; j++) {
+//             newArray[j] = haystack[j + 1];
+//         }
+
+//         bs_list(newArray, needle);
+//     }
+
+//     if (middle < needle) {
+//         let newArray = [];
+
+//         for (let j = 0; j < middleIndex; j++) {
+//             newArray[j] = haystack[j + middleIndex];
+//         }
+
+//         bs_list(newArray, needle);
+//     }
+// }
