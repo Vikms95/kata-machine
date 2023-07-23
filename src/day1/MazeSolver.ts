@@ -1,4 +1,3 @@
-const;
 export default function solve(
     maze: string[],
     wall: string,
@@ -8,42 +7,43 @@ export default function solve(
 ): Point[] {
     if (!path.length) {
         path.push(start);
+        return solve(maze, "x", start, end, path);
     }
     if (start.x == end.x && start.y == end.y) {
         return path;
     }
 
     for (let index = 0; index < 4; index++) {
-        // Depending on index increase a value of start
-        let { x, y } = { ...start };
+        const coords = { ...start };
 
         switch (index) {
             case 0:
-                x++;
+                coords.x++;
+                break;
             case 1:
-                y++;
+                coords.y++;
+                break;
             case 2:
-                x--;
+                coords.x--;
+                break;
             case 3:
-                y--;
+                coords.y--;
+                break;
         }
 
-        // wall, seen, out of bounds
-        if (
-            maze?.[x]?.[y] == wall ||
-            maze?.[x]?.[y] == "*" ||
-            typeof maze?.[x]?.[y] == "undefined"
-        ) {
+        const square = maze?.[coords.y]?.[coords.x];
+
+        // wall,            // seen,           //out of bounds
+        const isTouched = path.some(
+            (idx) => idx.x == coords.x && idx.y == coords.y,
+        );
+        if (square == wall || isTouched || typeof square == "undefined") {
             continue;
-        } else {
-            path.push({ x, y });
-            return solve(maze, "x", { x, y }, end, path);
         }
+
+        path.push(coords);
+        return solve(maze, "x", coords, end, path);
     }
 
-    return path;
-    // base case
-    // 2. the next coords equal those of a wall
-    // 3. the next coords are already marked
-    // 4. the next coords are out of bounds
+    return solve(maze, "x", start, end, path);
 }
