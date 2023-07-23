@@ -4,31 +4,52 @@
 // }
 
 export default function bs_list(haystack: number[], needle: number): boolean {
+    // Second iteration
     let low = 0;
     let high = haystack.length;
 
-    // While the low and the high don't clash (this will only happen when 1 element exists)
     while (low < high) {
-        const mid = Math.floor(low + (high - low) / 2);
-        const value = haystack[mid];
+        // I did try low + high in this second iteration in this
+        const middle = Math.floor(low + (high - low) / 2);
+        const value = haystack[middle];
 
-        if (value === needle) {
+        if (value == needle) {
             return true;
-            // Lower than the desired value
         } else if (value < needle) {
-            // Search right, from mid onwards (excluding the already checked mid)
-
-            low = mid + 1;
-            // Higher than the desired value
+            low = middle + 1;
         } else if (value > needle) {
-            // Search left, from mid backwards
-
-            high = mid;
+            high = middle - 1;
         }
     }
 
     return false;
 }
+
+// Solutionn - First iteration
+//     let low = 0;
+//     let high = haystack.length;
+
+//     // While the low and the high don't clash (this will only happen when 1 element exists)
+//     while (low < high) {
+//         const mid = Math.floor(low + (high - low) / 2);
+//         const value = haystack[mid];
+
+//         if (value === needle) {
+//             return true;
+//             // Lower than the desired value
+//         } else if (value < needle) {
+//             // Search right, from mid onwards (excluding the already checked mid)
+
+//             low = mid + 1;
+//             // Higher than the desired value
+//         } else if (value > needle) {
+//             // Search left, from mid backwards
+
+//             high = mid;
+//         }
+//     }
+
+//     return false;
 
 // Try 1
 
